@@ -142,6 +142,7 @@ public class Remoto_Servidor_Pastor extends javax.swing.JFrame {
                     lstlog.append("new cliente " + name + " Se ha conectado ...\n");
                     while (true) {
                         data = (transferencia) entrada.readObject();
+                        String nombrearchivo=data.getNombrefichero();
                         mod.addElement(data);
                         lstlog.append("Obteniendo archivo...\n");
                     }
