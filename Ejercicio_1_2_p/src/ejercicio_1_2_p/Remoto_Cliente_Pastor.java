@@ -211,6 +211,7 @@ void mtdLimpiarTabla(){
     String rutapath="";
     String datos[]= new String[4];
     DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    
     private void btnconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconnectActionPerformed
         
         try {
@@ -304,7 +305,8 @@ void mtdLimpiarTabla(){
 
     private void lblenviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblenviarMouseClicked
       try {
-            
+            String ippc=InetAddress.getLocalHost().getHostAddress();
+        String nombrepc=InetAddress.getLocalHost().getHostName();
            
           
                 File fichero = new File(rutapath);
@@ -321,26 +323,29 @@ void mtdLimpiarTabla(){
                     objtransferencia.setPesofichero(String.valueOf(fichero.length()/1000));
                     objtransferencia.setNombrefichero(fichero.getName());
                     objtransferencia.setArchivo(contenedor);
+                    objtransferencia.setNombre(nombrepc);
+                    objtransferencia.setIp(ippc);
                     out.writeObject(objtransferencia);
                     out.flush();
                 //
                 // bytes Transferred / fileSize * 100
-            }
                 //////AÑADIENDO AL JLIST MODELO
-         DefaultListModel modelo = new DefaultListModel();
-         lstarchivos.setModel(modelo);
-         modelo.addElement(fichero.getName());
+                 DefaultListModel modelo = new DefaultListModel();
+                 lstarchivos.setModel(modelo);
+                 modelo.addElement(fichero.getName());
          /////////////////////
            ///////   HORA
-            Date date = new Date();
-            String hora=dateFormat.format(date);
-            System.out.println(hora);
+                   Date date = new Date();
+                  String hora=dateFormat.format(date);
+                  System.out.println(hora);
          ////////AÑADIENDO A LA TABLA
-         datos[0]=fichero.getName();
-         datos[1]=String.valueOf(fichero.length());
-         datos[2]=txtIp.getText();
-         datos[3]=hora;
-         modelotabla.addRow(datos);
+                      datos[0]=fichero.getName();
+                    datos[1]=String.valueOf(fichero.length());
+                     datos[2]=txtIp.getText();
+                     datos[3]=hora;
+                     modelotabla.addRow(datos);
+            }
+                
                 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e, "Error", JOptionPane.ERROR_MESSAGE);

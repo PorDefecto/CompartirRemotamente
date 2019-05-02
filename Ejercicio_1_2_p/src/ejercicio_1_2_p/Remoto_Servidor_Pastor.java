@@ -200,14 +200,14 @@ void mtdLimpiarTabla(){
                     Socket s = server.accept();
                     entrada = new ObjectInputStream(s.getInputStream());
                     transferencia data = (transferencia) entrada.readObject();
-                    String name = data.getNombre();
+                    String nombre = data.getNombre();
                     
-                    lstlog.append("new cliente " + name + " Se ha conectado ...\n");
+                    lstlog.append("new cliente " + nombre + " Se ha conectado ...\n");
                     while (true) {
                         data = (transferencia) entrada.readObject();
                         String nombrearchivo=data.getNombrefichero();
                         mod.addElement(data);
-                        lstlog.append("Obteniendo archivo...\n");
+                       lstlog.append("Obteniendo el archivo "+nombrearchivo+"Del usuario : "+nombre+"\n");
                         datos[0]=data.getNombrefichero();
                         datos[1]=data.getPesofichero();
                         datos[2]=data.getNombre();
@@ -253,9 +253,13 @@ void mtdLimpiarTabla(){
                     while (true) {
                         data = (transferencia) entrada.readObject();
                         String nombrearchivo=data.getNombrefichero();
-                        mod.addElement(nombrearchivo);
+                        mod.addElement(data);
                        lstlog.append("Obteniendo el archivo "+nombrearchivo+"Del usuario : "+nombre+"\n");
-                       
+                        datos[0]=data.getNombrefichero();
+                        datos[1]=data.getPesofichero();
+                        datos[2]=data.getNombre();
+                        datos[3]=data.getIp();
+                        modelotabla.addRow(datos);
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(Remoto_Servidor_Pastor.this, e, "Error", JOptionPane.ERROR_MESSAGE);
