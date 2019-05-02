@@ -86,6 +86,7 @@ void mtdLimpiarTabla(){
         lblenviar = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblhistorial = new javax.swing.JTable();
+        lblconectar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -200,6 +201,7 @@ void mtdLimpiarTabla(){
         jScrollPane2.setViewportView(tblhistorial);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, 470, 90));
+        getContentPane().add(lblconectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 160, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -221,9 +223,13 @@ void mtdLimpiarTabla(){
             objtransferencia.setIp(ippc);
             out.writeObject(objtransferencia);
             out.flush();
+            //
+            lblconectar.setText("Conectado..");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e, "Error", JOptionPane.ERROR_MESSAGE);
+            lblconectar.setText("Desconectado..");
         }
+        
     }//GEN-LAST:event_btnconnectActionPerformed
 
     private void btnenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnenviarActionPerformed
@@ -338,6 +344,7 @@ void mtdLimpiarTabla(){
                 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e, "Error", JOptionPane.ERROR_MESSAGE);
+            lblconectar.setText("Desconectado..");
         }
     }//GEN-LAST:event_lblenviarMouseClicked
 
@@ -389,6 +396,7 @@ void mtdLimpiarTabla(){
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTree jTree1;
+    private javax.swing.JLabel lblconectar;
     private javax.swing.JLabel lblenviar;
     private javax.swing.JList<String> lstarchivos;
     private javax.swing.JSlider slider;

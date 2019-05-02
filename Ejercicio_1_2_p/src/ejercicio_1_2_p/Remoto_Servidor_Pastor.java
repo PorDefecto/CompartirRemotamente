@@ -15,6 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author PorDefecto
@@ -27,8 +29,24 @@ public class Remoto_Servidor_Pastor extends javax.swing.JFrame {
      */
     public Remoto_Servidor_Pastor() {
         initComponents();
+        btniniciar.setVisible(false);
+        lblconectar.setVisible(false);
+        mtdLimpiarTabla();
     }
-
+     DefaultTableModel modelotabla = new DefaultTableModel();
+         JTable tabla = new JTable (modelotabla);   
+void mtdLimpiarTabla(){
+   
+    try{
+            modelotabla = (DefaultTableModel) tblhistorial.getModel();
+            int a = modelotabla.getRowCount() - 1;
+            for(int i = 0; i <= a; i++){
+                modelotabla.removeRow(0);
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,28 +56,40 @@ public class Remoto_Servidor_Pastor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btniniciar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstlog = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstarchivos = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lbldesconectar = new javax.swing.JLabel();
+        lblconectar = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblhistorial = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Iniciar server");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btniniciar.setText("Iniciar server");
+        btniniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btniniciarActionPerformed(evt);
             }
         });
+        getContentPane().add(btniniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 103, -1, -1));
 
         lstlog.setEditable(false);
         lstlog.setColumns(20);
         lstlog.setRows(5);
         jScrollPane1.setViewportView(lstlog);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 480, 150));
 
         lstarchivos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -68,66 +98,99 @@ public class Remoto_Servidor_Pastor extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(lstarchivos);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 132, 150));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("HISTORIAL");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("ARCHIVOS");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel1.setText("Servidor");
+        jPanel1.setBackground(new java.awt.Color(88, 172, 250));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel3)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(107, 107, 107)))))
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/database (1).png"))); // NOI18N
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/transfer (1).png"))); // NOI18N
+
+        jLabel5.setBackground(new java.awt.Color(8, 95, 99));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(8, 95, 99));
+        jLabel5.setText("Servicio Servidor");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
                 .addContainerGap())
         );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5))
+            .addComponent(jLabel4)
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/power.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 70, -1, -1));
+
+        lbldesconectar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbldesconectar.setForeground(new java.awt.Color(255, 0, 0));
+        lbldesconectar.setText("Desconectado...");
+        getContentPane().add(lbldesconectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        lblconectar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblconectar.setForeground(new java.awt.Color(0, 0, 255));
+        lblconectar.setText("Conectado...");
+        getContentPane().add(lblconectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        tblhistorial.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Tamaño", "Cliente", "IP-Cliente"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblhistorial);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 600, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    String datos[]= new String[4];
     private ServerSocket server;
     private ObjectOutputStream out;
     private ObjectInputStream entrada;
     private DefaultListModel mod = new DefaultListModel();
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btniniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btniniciarActionPerformed
         lstarchivos.setModel(mod);
         new Thread(new Runnable() {
             @Override
@@ -145,6 +208,11 @@ public class Remoto_Servidor_Pastor extends javax.swing.JFrame {
                         String nombrearchivo=data.getNombrefichero();
                         mod.addElement(data);
                         lstlog.append("Obteniendo archivo...\n");
+                        datos[0]=data.getNombrefichero();
+                        datos[1]=data.getPesofichero();
+                        datos[2]=data.getNombre();
+                        datos[3]=data.getIp();
+                        modelotabla.addRow(datos);
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(Remoto_Servidor_Pastor.this, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -152,7 +220,7 @@ public class Remoto_Servidor_Pastor extends javax.swing.JFrame {
 
             }
         }).start();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btniniciarActionPerformed
 
     private void lstarchivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstarchivosMouseClicked
         if (evt.getClickCount() == 2) {
@@ -165,6 +233,39 @@ public class Remoto_Servidor_Pastor extends javax.swing.JFrame {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_lstarchivosMouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+         lbldesconectar.setVisible(false);
+         lblconectar.setVisible(true);
+        lstarchivos.setModel(mod);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    server = new ServerSocket(9999);
+                    Socket s = server.accept();
+                    entrada = new ObjectInputStream(s.getInputStream());
+                    transferencia data = (transferencia) entrada.readObject();
+                    String nombre = data.getNombre();
+                    String ip= data.getIp();
+                    lstlog.append("Nuevo cliente " + nombre + " Se ha conectado Con la IP: "+ip+"\n");
+                   
+                    while (true) {
+                        data = (transferencia) entrada.readObject();
+                        String nombrearchivo=data.getNombrefichero();
+                        mod.addElement(nombrearchivo);
+                       lstlog.append("Obteniendo el archivo "+nombrearchivo+"Del usuario : "+nombre+"\n");
+                       
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(Remoto_Servidor_Pastor.this, e, "Error", JOptionPane.ERROR_MESSAGE);
+                    lbldesconectar.setVisible(true);
+                    lblconectar.setVisible(false);
+                }
+                
+            }
+        }).start();
+    }//GEN-LAST:event_jLabel6MouseClicked
  private void guardarenruta() {
         transferencia data = (transferencia) mod.getElementAt(lstarchivos.getSelectedIndex());
         JFileChooser ch = new JFileChooser();
@@ -176,6 +277,8 @@ public class Remoto_Servidor_Pastor extends javax.swing.JFrame {
                 out.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e, "Error", JOptionPane.ERROR_MESSAGE);
+                 lbldesconectar.setVisible(true);
+                    lblconectar.setVisible(false);
             }
         }
     }
@@ -190,7 +293,7 @@ public class Remoto_Servidor_Pastor extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -215,13 +318,21 @@ public class Remoto_Servidor_Pastor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btniniciar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblconectar;
+    private javax.swing.JLabel lbldesconectar;
     private javax.swing.JList<String> lstarchivos;
     private javax.swing.JTextArea lstlog;
+    private javax.swing.JTable tblhistorial;
     // End of variables declaration//GEN-END:variables
 }
