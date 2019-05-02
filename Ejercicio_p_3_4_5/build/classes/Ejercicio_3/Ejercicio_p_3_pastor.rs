@@ -1,0 +1,4 @@
+tarea_pastor.Ejercicio_p_3_pastor$3
+tarea_pastor.Ejercicio_p_3_pastor$1
+tarea_pastor.Ejercicio_p_3_pastor$2
+tarea_pastor.Ejercicio_p_3_pastor

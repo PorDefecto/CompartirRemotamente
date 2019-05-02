@@ -87,6 +87,7 @@ void mtdLimpiarTabla(){
         jScrollPane2 = new javax.swing.JScrollPane();
         tblhistorial = new javax.swing.JTable();
         lblconectar = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,7 +117,7 @@ void mtdLimpiarTabla(){
         slider.setMaximum(10);
         slider.setPaintLabels(true);
         slider.setPaintTicks(true);
-        getContentPane().add(slider, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 160, -1));
+        getContentPane().add(slider, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 250, -1));
 
         jPanel1.setBackground(new java.awt.Color(88, 172, 250));
 
@@ -160,7 +161,7 @@ void mtdLimpiarTabla(){
         });
         jScrollPane3.setViewportView(lstarchivos);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 250, 190));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 250, 130));
 
         jTree1.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
@@ -203,7 +204,16 @@ void mtdLimpiarTabla(){
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, 470, 90));
         getContentPane().add(lblconectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 160, -1));
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/settings.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, -1, -1));
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private Socket socket;
     private ObjectOutputStream out;
@@ -353,6 +363,11 @@ void mtdLimpiarTabla(){
         }
     }//GEN-LAST:event_lblenviarMouseClicked
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        String valor =JOptionPane.showInputDialog(null,"Nuevo valor Para el maximo de kb","Settings",JOptionPane.QUESTION_MESSAGE);
+        slider.setMaximum(Integer.parseInt(valor));
+    }//GEN-LAST:event_jLabel5MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -396,6 +411,7 @@ void mtdLimpiarTabla(){
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

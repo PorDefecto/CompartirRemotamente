@@ -184,6 +184,7 @@ void mtdLimpiarTabla(){
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 600, 90));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     String datos[]= new String[4];
     private ServerSocket server;
