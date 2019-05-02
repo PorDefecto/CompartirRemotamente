@@ -267,6 +267,7 @@ void mtdLimpiarTabla(){
         }).start();
     }//GEN-LAST:event_jLabel6MouseClicked
  private void guardarenruta() {
+        System.out.println(lstarchivos.getSelectedIndex());
         transferencia data = (transferencia) mod.getElementAt(lstarchivos.getSelectedIndex());
         JFileChooser ch = new JFileChooser();
         int c = ch.showSaveDialog(this);
