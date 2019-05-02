@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package ejercicio_1_2_p;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+////////////////////////////
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -19,6 +23,8 @@ import java.net.Socket;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author PorDefecto
@@ -35,11 +41,25 @@ public class Remoto_Cliente_Pastor extends javax.swing.JFrame {
         jTreeFiles.setJTree(jTree1);
          jTreeFiles.init();
          
-         btnenviar.setVisible(false);
-         txtnombre.setVisible(false);
+        btnenviar.setVisible(false);
+        txtnombre.setVisible(false);
+         mtdLimpiarTabla();
          
     }
-
+     DefaultTableModel modelotabla = new DefaultTableModel();
+         JTable tabla = new JTable (modelotabla);   
+void mtdLimpiarTabla(){
+   
+    try{
+            modelotabla = (DefaultTableModel) tblhistorial.getModel();
+            int a = modelotabla.getRowCount() - 1;
+            for(int i = 0; i <= a; i++){
+                modelotabla.removeRow(0);
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,6 +84,8 @@ public class Remoto_Cliente_Pastor extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         lblenviar = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblhistorial = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -82,8 +104,8 @@ public class Remoto_Cliente_Pastor extends javax.swing.JFrame {
                 btnenviarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnenviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 470, -1, -1));
-        getContentPane().add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 179, -1));
+        getContentPane().add(btnenviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
+        getContentPane().add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 179, -1));
         getContentPane().add(txtIp, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 127, -1));
 
         jLabel2.setText("IP");
@@ -156,12 +178,37 @@ public class Remoto_Cliente_Pastor extends javax.swing.JFrame {
         });
         getContentPane().add(lblenviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, -1, -1));
 
+        tblhistorial.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Archivo", "Tamaño", "Ip-Receptor", "Hora"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblhistorial);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, 470, 90));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
- private Socket socket;
+    private Socket socket;
     private ObjectOutputStream out;
     String ruta="";
     String rutapath="";
+    String datos[]= new String[4];
+    DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private void btnconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconnectActionPerformed
         
         try {
@@ -273,9 +320,21 @@ public class Remoto_Cliente_Pastor extends javax.swing.JFrame {
                 //
                 // bytes Transferred / fileSize * 100
             }
-                DefaultListModel modelo = new DefaultListModel();
+                //////AÑADIENDO AL JLIST MODELO
+         DefaultListModel modelo = new DefaultListModel();
          lstarchivos.setModel(modelo);
-         modelo.addElement(fichero.getName()+" "+(fichero.length()/1000)+" "+txtIp.getText());
+         modelo.addElement(fichero.getName());
+         /////////////////////
+           ///////   HORA
+            Date date = new Date();
+            String hora=dateFormat.format(date);
+            System.out.println(hora);
+         ////////AÑADIENDO A LA TABLA
+         datos[0]=fichero.getName();
+         datos[1]=String.valueOf(fichero.length());
+         datos[2]=txtIp.getText();
+         datos[3]=hora;
+         modelotabla.addRow(datos);
                 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -327,11 +386,13 @@ public class Remoto_Cliente_Pastor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTree jTree1;
     private javax.swing.JLabel lblenviar;
     private javax.swing.JList<String> lstarchivos;
     private javax.swing.JSlider slider;
+    private javax.swing.JTable tblhistorial;
     private javax.swing.JTextField txtIp;
     private javax.swing.JTextField txtnombre;
     // End of variables declaration//GEN-END:variables
